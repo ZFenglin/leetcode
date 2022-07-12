@@ -18,26 +18,34 @@
  * @param {ListNode} headB
  * @return {ListNode}
  */
- var getIntersectionNode = function (headA, headB) {
-    let setA = new Set()
-    let setB = new Set()
-    while (headA || headB) {
-        if (headA) {
-            if (setB.has(headA)) {
-                return headA
-            }
-            setA.add(headA)
-            headA = headA.next
-        }
-        if (headB) {
-            if (setA.has(headB)) {
-                return headB
-            }
-            setB.add(headB)
-            headB = headB.next
-        }
+// // set
+// var getIntersectionNode = function (headA, headB) {
+//     const setA = new Set()
+//     const setB = new Set()
+//     while (headA || headB) {
+//         if (headA) {
+//             if (setB.has(headA)) return headA
+//             setA.add(headA)
+//             headA = headA.next
+//         }
+//         if (headB) {
+//             if (setA.has(headB)) return headB
+//             setB.add(headB)
+//             headB = headB.next
+//         }
+//     }
+//     return null
+// };
+// 双指针(有相交就会中途相遇，否则结尾相遇)
+var getIntersectionNode = function (headA, headB) {
+    if (headA === null || headB === null) return null
+    let pa = headA
+    let pb = headB
+    while (pa !== pb) {
+        pa = pa === null ? headB : pa.next
+        pb = pb === null ? headA : pb.next
     }
-    return null
+    return pa
 };
 // @lc code=end
 
