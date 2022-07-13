@@ -19,41 +19,37 @@
  * @return {ListNode}
  */
 var reverseBetween = function (head, left, right) {
-    const temp = new ListNode(-1);
-    temp.next = head;
-
-    let pre = temp;
+    // 找到需要反转的开头结尾
+    const temp = new ListNode(-1)
+    temp.next = head
+    let pre = temp // 左边前一个节点
     for (let i = 0; i < left - 1; i++) {
-        pre = pre.next;
+        pre = pre.next
     }
 
-    let rightNode = pre;
+    let rightNode = pre // 右边节点
     for (let i = 0; i < right - left + 1; i++) {
-        rightNode = rightNode.next;
+        rightNode = rightNode.next
     }
-
-    let leftNode = pre.next;
-    let rightNodeNext = rightNode.next;
-
-    pre.next = null;
-    rightNode.next = null;
-
-    reverseLinkedList(leftNode);
-
-    // 第 5 步：接回到原来的链表中
-    pre.next = rightNode;
-    leftNode.next = rightNodeNext;
-    return temp.next;
+    // 断开链接反转链表
+    let leftNode = pre.next // 左边节点
+    let rightNodeNext = rightNode.next // 右边后一个节点
+    pre.next = null
+    rightNode.next = null
+    reverseLinkedList(leftNode)
+    // 重新连接
+    pre.next = rightNode
+    leftNode.next = rightNodeNext
+    return temp.next
 };
 const reverseLinkedList = (head) => {
-    let pre = null;
-    let cur = head;
-
-    while (cur) {
-        const next = cur.next;
-        cur.next = pre;
-        pre = cur;
-        cur = next;
+    let pre = null
+    let current = head
+    while (current) {
+        const next = current.next
+        current.next = pre
+        pre = current
+        current = next
     }
 }
 // @lc code=end
