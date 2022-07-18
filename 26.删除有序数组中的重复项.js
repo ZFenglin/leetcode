@@ -9,8 +9,16 @@
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
-
+// 双指针
+var removeDuplicates = function (nums) {
+    let l = 0, r = 0
+    while (r < nums.length) {
+        if (nums[r] > nums[l]) {
+            nums[++l] = nums[r]
+        }
+        r++
+    }
+    nums.length = l + 1
 };
 // @lc code=end
 

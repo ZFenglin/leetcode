@@ -9,8 +9,21 @@
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
-
+// 快慢指针
+var removeDuplicates = function (nums) {
+    if (nums.length < 2) return
+    let l = 2, r = 2
+    while (r < nums.length) {
+        if (nums[l - 2] !== nums[r]) {
+            nums[l++] = nums[r]
+        }
+        r++
+    }
+    nums.length = l
 };
 // @lc code=end
 
+
+// @after-stub-for-debug-begin
+module.exports = removeDuplicates;
+// @after-stub-for-debug-end
